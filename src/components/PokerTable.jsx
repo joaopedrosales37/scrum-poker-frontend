@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs/lib/stomp';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://scrum-poker-backend-kgf7.onrender.com';
+
 const DECKS = {
   FIBONACCI: ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '☕', '?'],
   TSHIRT: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '☕', '?'],
@@ -39,7 +41,7 @@ export default function PokerTable({ roomId, username, onLeave }) {
   };
 
   useEffect(() => {
-        const socket = new SockJS('https://scrum-poker-backend-kgf7.onrender.com');
+    const socket = new SockJS(BACKEND_URL);
     const stompClient = Stomp.over(socket);
     stompClient.debug = null;
     
